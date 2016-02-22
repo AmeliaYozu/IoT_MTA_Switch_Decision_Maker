@@ -42,18 +42,50 @@ class mtaUpdates(object):
 	    # Trip update represents a change in timetable
 	    if entity.trip_update and entity.trip_update.trip.trip_id:
 		update = tripupdate.tripupdate()
+		update.tripId = entity.trip_update.trip.trip_id
+		update.routeId = entity.trip_update.trip.route_id
+		update.startDate = entity.trip_update.trip.start_date
+		# We can get direction from tripId
+		update.direction = update.tripId[10]
 		
-		##### INSERT TRIPUPDATE CODE HERE ####			
+		# Route id could be 1,2,3,4,5,6 or S.
+                # However for S they use  GS
+                if update.routeId == 'GS':
+                    update.routeId = 'S'
+		
+		# Create an ordered dictionary
+		for stopUpdate in entity.trip_update.stop_time_update:
+		    arrivalTime = {"arrivalTime" : stopUpdate.arrival.time}
+		    departureTime = {"departureTime" : stopUpdate.departure.time}    
+		    update.futureStops[stopUpdate.stop_id] = [arrivalTime, departureTime]
+		
+		
+		self.tripUpdates.append(update)
 
 	    if entity.vehicle and entity.vehicle.trip.trip_id:
 	    	v = vehicle.vehicle()
-		##### INSERT VEHICLE CODE HERE #####
+		vehicleData = entity.vehicle
+		tripId = vehicleData.trip.trip_id
+		v.currentStopNumber = vehicleData.current_stop_sequence
+		v.currentStopId = vehicleData.stop_id
+		v.timestamp   =  vehicleData.timestamp
+		if not vehicleData.current_status:
+		    v.currentStopStatus = self.VCS[1]
+		else:
+		    v.currentStopStatus = self.VCS[vehicleData.current_status]
+		# Find the tripUpdate object with the exact tripId
+	    	tripUpdateObject = next((trip for trip in self.tripUpdates if trip.tripId == tripId), None)
+		tripUpdateObject.vehicleData = v
 	    
 	    if entity.alert:
                 a = alert.alert()
-		#### INSERT ALERT CODE HERE #####
+		for item in entity.alert.informed_entity:
+		    trip = item.trip.trip_id
+                    a.tripId.append(trip)
+                    a.routeId[trip] = item.trip.route_id  
+		a.alertMessage = entity.alert.header_text
+		self.alerts.append(a)
 
 	return self.tripUpdates
 
 
-    # END OF getTripUpdates method
