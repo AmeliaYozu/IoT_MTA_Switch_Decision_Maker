@@ -12,7 +12,7 @@ import aws
 
 class S3(object):
 	S3 = None
-	S3_BUCKET_NAME = <INSERT YOUR S3 BUCKET NAME HERE>
+	S3_BUCKET_NAME = 'mtadatamon8'
 	S3Bucket = None
 	trainingData = None
 
