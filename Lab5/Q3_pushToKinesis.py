@@ -3,7 +3,7 @@
 # a lambda function will be triggered as a result, that will send it to AWS ML for classification
 # Usage python pushToKinesis.py <csv file name with extension>
 
-import sys,csv,json
+import sys,csv,json, time
 
 import boto3
 
@@ -11,7 +11,7 @@ sys.path.append('../utils')
 import aws
 
 
-KINESIS_STREAM_NAME = <WHATEVER YOUR STREAM NAME IS>
+KINESIS_STREAM_NAME = "mta_Kinesis"
 
 
 def main(fileName):
@@ -19,13 +19,22 @@ def main(fileName):
     # connect to kinesis
     kinesis = aws.getClient('kinesis','us-east-1')
     data = [] # list of dictionaries will be sent to kinesis
+    
     with open(fileName,'rb') as f:
     	dataReader = csv.DictReader(f)
         for row in dataReader:
+            #time.sleep(1)
             kinesis.put_record(StreamName=KINESIS_STREAM_NAME, Data=json.dumps(row), PartitionKey='0')
-            break
+            #print json.dumps(row)
+            #break
         f.close() 
-
+    
+    '''
+    to test if Kinesis works properly
+    while(1):
+        kinesis.put_record(StreamName=KINESIS_STREAM_NAME, Data="json.dumps(row)", PartitionKey='0')
+        time.sleep(2)
+    '''    
 
 
 
@@ -40,4 +49,4 @@ if __name__ == "__main__":
         fileName = sys.argv[1]
         main(fileName)
     except Exception as e:
-        raise e
+        pass

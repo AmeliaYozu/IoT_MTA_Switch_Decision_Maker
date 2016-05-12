@@ -12,14 +12,14 @@ import aws
 
 class S3(object):
 	S3 = None
-	S3_BUCKET_NAME = 'mtadatamon8'
+	S3_BUCKET_NAME = 'mtamon8'
 	S3Bucket = None
 	trainingData = None
 
 
 	def __init__(self,trainingData):
 		# Get s3 resource , function for this is in utils/aws
-		self.S3 = aws.getResource('s3','us-west-1')
+		self.S3 = aws.getResource('s3','us-east-1')
 		self.trainingData = trainingData
 
 
