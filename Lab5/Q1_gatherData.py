@@ -15,7 +15,7 @@ try:
 	count = 1
 	output = []
 	while(count<1000):		
-		mta = mtaUpdate.mtaUpdates('9677454425d764f551397579a52aa866')
+		mta = mtaUpdate.mtaUpdates('')
 		trips = mta.getTripUpdates() #get a list of tripUpdate objects
 		print len(trips)
 		for _ in trips:	

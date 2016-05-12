@@ -3,12 +3,12 @@
 # Amazon SNS topic Lambda will publish to whenever a tweet is
 # classified as actionable.
 AWS = {
-    'awsAccountId' : "758957437187",
-    'kinesisStream' : "mta_Kinesis",
-    'lambdaExecutionRole' : "lambda_K_Role",
-    'lambdaFunctionName' : "classifyMta",
-    'mlModelId' : "ml-AHJA7TCEP2ZJ63RT",
-    'region' : "us-east-1",
+    'awsAccountId' : "",
+    'kinesisStream' : "",
+    'lambdaExecutionRole' : "",
+    'lambdaFunctionName' : "",
+    'mlModelId' : "",
+    'region' : "",
 }
 
 # The parameters below are used by scanner.py to read tweets from the

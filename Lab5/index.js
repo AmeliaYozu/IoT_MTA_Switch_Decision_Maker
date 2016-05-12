@@ -5,7 +5,7 @@ exports.handler = function(event, context) {
   var AWS = require('aws-sdk');
   var ml = new AWS.MachineLearning();
   var endpointUrl = 'https://realtime.machinelearning.us-east-1.amazonaws.com/';
-  var mlModelId = 'ml-AHJA7TCEP2ZJ63RT';
+  var mlModelId = '';
   var numMessagesProcessed = 0;
   var numMessagesToBeProcessed = event.Records.length;
 

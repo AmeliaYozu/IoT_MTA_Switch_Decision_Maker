@@ -12,8 +12,8 @@ sys.path.append('../utils')
 import aws
 
 TIMESTAMP  =  time.strftime('%Y-%m-%d-%H-%M-%S')
-S3_BUCKET_NAME = "finalmon8"
-S3_FILE_NAME = 'final.csv'
+S3_BUCKET_NAME = ""
+S3_FILE_NAME = ''
 #S3_BATCH_NAME ='finalData_batch.csv'
 S3_URI = "s3://{0}/{1}".format(S3_BUCKET_NAME, S3_FILE_NAME)
 #S3_BATCH_URI = "s3://{0}/{1}".format(S3_BUCKET_NAME, S3_BATCH_NAME)

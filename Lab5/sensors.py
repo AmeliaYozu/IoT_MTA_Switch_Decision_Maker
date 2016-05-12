@@ -17,9 +17,9 @@ switch_pin_number=8
 
 
 
-ACCOUNT_ID = '758957437187'
-IDENTITY_POOL_ID = 'us-east-1:57e76a23-719b-4e4e-b063-494ddb08f7e5'
-ROLE_ARN = 'arn:aws:iam::758957437187:role/Cognito_edisonDemoKinesisUnauth_Role'
+ACCOUNT_ID = ''
+IDENTITY_POOL_ID = ''
+ROLE_ARN = ''
 
 # Use cognito to get an identity.
 cognito = boto.connect_cognito_identity()
